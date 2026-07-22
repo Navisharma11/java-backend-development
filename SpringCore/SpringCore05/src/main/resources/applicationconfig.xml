@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--    <bean id="java" class="service.Java"/>-->
+<!--    <bean id="sb" class="service.SpringBoot" primary="true"/>-->
+<!--    <bean id="telusko" class="main.Telusko" autowire="byType"/>-->
+
+
+<!--    <bean id="java" class="service.Java" autowire-candidate="false"/>-->
+<!--    <bean id="sb" class="service.SpringBoot"/>-->
+<!--    <bean id="telusko" class="main.Telusko" autowire="constructor"/>-->
+
+
+<!--    <bean id="java" class="service.Java"/>-->
+<!--    <bean id="course" class="service.SpringBoot"/>-->
+<!--    <bean id="telusko" class="main.Telusko" autowire="byName"/>-->
+
+
+        <bean id="java" class="service.Java"/>
+        <bean id="sb" class="service.SpringBoot"/>
+        <bean id="telusko" class="main.Telusko" autowire="no">
+          <property ref="java" name="course"/>
+
+        </bean>
+
+
+</beans>
+
