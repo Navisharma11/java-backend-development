@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="depart" class="service.Department" c:dpNo="1" c:dpName="Alien"/>
+    <bean id="emp" class="service.Employee" p:empid="1" p:name="Raj" p:salary="45454.4" p:city="Bengaluru" p:depart-ref="depart"/>
+
+
+</beans>
