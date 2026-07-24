@@ -1,4 +1,4 @@
-package com.navisharma.SpringBoot01.config;
+package com.navisharma.SpringBoot02.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

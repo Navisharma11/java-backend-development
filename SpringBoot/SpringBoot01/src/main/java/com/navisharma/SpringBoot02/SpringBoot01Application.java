@@ -1,6 +1,6 @@
-package com.navisharma.SpringBoot01;
+package com.navisharma.SpringBoot02;
 
-import com.navisharma.SpringBoot01.service.GreetingsService;
+import com.navisharma.SpringBoot02.service.GreetingsService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;

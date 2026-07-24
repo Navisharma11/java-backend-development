@@ -1,4 +1,4 @@
-package com.navisharma.SpringBoot01.service;
+package com.navisharma.SpringBoot02.service;
 
 public interface IGreetings
 {

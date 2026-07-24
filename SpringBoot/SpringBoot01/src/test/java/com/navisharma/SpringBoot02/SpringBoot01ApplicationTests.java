@@ -1,4 +1,4 @@
-package com.navisharma.SpringBoot01;
+package com.navisharma.SpringBoot02;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
