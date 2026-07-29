@@ -3,6 +3,10 @@ package com.navisharma.service;
 import com.navisharma.entity.Vaccine;
 import com.navisharma.repo.IVaccineRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,99 +23,38 @@ public class VaccineService implements IVaccineService
         this.repo = repo;
     }
 
+
     @Override
-    public String registerVaccineInfo(Vaccine vaccine) {
-        Vaccine vac = repo.save(vaccine);
-        return "Vaccine info registered with id "+ vac.getId();
+    public Iterable<Vaccine> fetchDetailsBySorting(boolean status, String...properties) {
+        Sort sort = Sort.by(status ? Sort.Direction.ASC : Sort.Direction.DESC,properties );
+        return repo.findAll(sort);
     }
 
     @Override
-    public Iterable<Vaccine> registerMultipleVaccineInfo(Iterable<Vaccine> vaccines) {
-        Iterable<Vaccine> vacci = repo.saveAll(vaccines);
-        return vacci;
+    public Page<Vaccine> fetchDetailsByPagenation(int pgNo, int pgSize, boolean status, String... properties) {
+//        Sort sort = Sort.by(status ? Sort.Direction.ASC : Sort.Direction.DESC,properties);
+        PageRequest pageable = PageRequest.of(pgNo, pgSize, status ? Sort.Direction.ASC : Sort.Direction.DESC,properties);
+        Page<Vaccine> page = repo.findAll(pageable);
+        return page;
     }
 
     @Override
-    public Long vaccinescount() {
-        return repo.count();
-    }
-
-    @Override
-    public Boolean checkVaccineAvailability(Integer id) {
-       return repo.existsById(id);
-    }
-
-    @Override
-    public Iterable<Vaccine> getAllVaccineInfo() {
-        return repo.findAll();
-    }
-
-    @Override
-    public Iterable<Vaccine> getAllVaccines(Iterable<Integer> ids) {
-            return repo.findAllById(ids);
-    }
-
-    @Override
-    public Optional<Vaccine> getVaccineById(Integer id) {
-        return repo.findById(id);
-    }
-
-    @Override
-    public String removeVaccineById(Integer id) {
-//        Optional<Vaccine> optional = repo.findById(id);
-//        if(optional.isPresent())
-//        {
-//            repo.deleteById(id);
-//            return "Record with id "+ id + " is deleted";
-//        }
-//
-//        return "Record with id "+ id + " is not available to delete";
-
-        Boolean status = repo.existsById(id);
-        if(status)
-        {
-            repo.deleteById(id);
-            return "Record with id "+ id + " is deleted";
-        }
-
-        return "Record with id "+ id + " is not available to delete";
-    }
-
-    @Override
-    public String removeVaccineByVaccine(Vaccine obj)
+    public void fetchDetailsByPagenation(int pgSize)
     {
-        Integer id = obj.getId();
-        Optional<Vaccine> optional = repo.findById(id);
-        if(optional.isPresent())
+        long count = 7l;
+
+        long pageCount = count/pgSize;   //4/2==>2     12/3==>4
+        //14.5==>2.8 ==>3
+
+        pageCount=count%pgSize==0?pageCount:++pageCount;
+
+        for(int i=0;i<pageCount;i++)
         {
-            repo.deleteById(id);
-            return "Record with id "+ id + " is deleted";
+            PageRequest pageable = PageRequest.of(i, pgSize);
+            Page<Vaccine> page = repo.findAll(pageable);
+            page.getContent().forEach(v -> System.out.println(v.getVaccineName() + " " + v.getVaccineCompany()));
+            System.out.println("------------------------------------------------------------------------------");
         }
 
-        return "Record with id "+ id + " is not available to delete";
-
     }
-
-    @Override
-    public String removeAllVaccinesByIds(List<Integer> ids) {
-
-        List<Vaccine> vaccines = (List<Vaccine>) repo.findAllById(ids);
-//        int count1 = ids.size();
-        int count2 = vaccines.size();
-//        if(count1==count2)
-//        {
-//            repo.deleteAllById(ids);
-//            return "Vaccine Info deleted for given ids";
-//        }
-
-        if(count2>0)
-        {
-            repo.deleteAllById(ids);
-            return "Vaccine Info deleted for given ids";
-        }
-
-        return "Failed to delete vaccine info";
-    }
-
-
 }

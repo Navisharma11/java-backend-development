@@ -1,31 +1,16 @@
 package com.navisharma.service;
 
 import com.navisharma.entity.Vaccine;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface IVaccineService
 {
-    public String registerVaccineInfo(Vaccine vacine);
+    public Iterable<Vaccine> fetchDetailsBySorting(boolean status,String...properties);
 
-    public Iterable<Vaccine> registerMultipleVaccineInfo(Iterable<Vaccine> vaccines);
+    public Page<Vaccine> fetchDetailsByPagenation(int pgNo, int pgSize, boolean status, String...properties);
 
-    public Long vaccinescount();
-
-    public Boolean checkVaccineAvailability(Integer id);
-
-    public Iterable<Vaccine> getAllVaccineInfo();
-
-    public Iterable<Vaccine> getAllVaccines(Iterable<Integer> ids);
-
-    public Optional<Vaccine> getVaccineById(Integer id);
-
-    public String removeVaccineById(Integer id);
-
-    public String removeVaccineByVaccine(Vaccine obj);
-
-    public String removeAllVaccinesByIds(List<Integer> ids);
-
-
+    public void fetchDetailsByPagenation(int pgSize);
 }
