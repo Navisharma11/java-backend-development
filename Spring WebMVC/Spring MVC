@@ -1,0 +1,24 @@
+==>Front Controller(Dispatcher Servlet) will receive incoming HTTP Request-->Pre processing and Post processing of request
+(DispatcherServlet is a predefined class in Spring MVC module acts as Front Controller)
+
+==>DS will forward the requested url to the HandlerMapper
+
+==>Handler Mapper will identify which controller will handle the request and this details will be given back to DS
+
+==>DS will now call the respective Controller
+
+==>Controller will process the request and return ModelAndView Object as a response to DS(FC)
+model--> Data
+view--> logical view name(view fileName)
+
+==>DS will call View Resolver which will identify the extension and view file location and these details will be given back to DS
+
+==>DS will send the model data to view component
+
+==>Model data will be rendered in the view file and sent back the view to DS
+
+==>DS will response back to client in client understandable format(view page)
+==================================================================================================================================================================
+==>In Spring WebMVC the Front Controller is DispatcherServlet which is a ready made servlet Component
+
+==>All the activities in Spring MVC takes place under the control or monitoring of DispatcherServlet(FrontController)
