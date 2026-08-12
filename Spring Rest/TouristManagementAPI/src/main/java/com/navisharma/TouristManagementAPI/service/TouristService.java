@@ -4,15 +4,25 @@ import com.navisharma.TouristManagementAPI.dao.ITouristRepo;
 import com.navisharma.TouristManagementAPI.exception.TouristNotFoundException;
 import com.navisharma.TouristManagementAPI.model.Tourist;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Scope("prototype")
+//@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class TouristService implements ITouristService
 {
     private ITouristRepo repo;
+
+    public TouristService()
+    {
+        System.out.println("TouristService Bean Created");
+    }
 
     @Autowired
     public void setRepo(ITouristRepo repo)

@@ -4,6 +4,7 @@ import com.navisharma.TouristManagementAPI.exception.TouristNotFoundException;
 import com.navisharma.TouristManagementAPI.model.Tourist;
 import com.navisharma.TouristManagementAPI.service.ITouristService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +12,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+//@Scope("request")
+@Scope("session")
 public class TouristRestApi
 {
     @Autowired
     private ITouristService service;
+
+    public TouristRestApi()
+    {
+        System.out.println("TouristRestApi Bean Created");
+    }
 
     @PostMapping("/regTourist")
     public ResponseEntity<String> registerTourist(@RequestBody Tourist tourist)
